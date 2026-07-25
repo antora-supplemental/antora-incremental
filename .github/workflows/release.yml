@@ -3,29 +3,69 @@ name: Release
 on:
   push:
     tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Semver X.Y.Z to publish (tag vX.Y.Z must exist on the remote)
+        required: true
 
 permissions:
   contents: write
-  id-token: write
+  id-token: write # npm trusted publishing (OIDC) — no NPM_TOKEN
+
+env:
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', inputs.version) || github.ref_name }}
+  RELEASE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref_name }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ env.RELEASE_TAG }}
+
       - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-          registry-url: https://registry.npmjs.org
           cache: pnpm
+          registry-url: https://registry.npmjs.org
+
       - run: pnpm install
       - run: pnpm test
+
       - name: Verify version matches tag
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          TAG_VERSION="${RELEASE_VERSION#v}"
           test "$PACKAGE_VERSION" = "$TAG_VERSION"
-      - run: pnpm publish --access public --no-git-checks
+
+      # Trusted publisher on npmjs.com (package → Access → Trusted publisher):
+      #   Provider: GitHub Actions
+      #   Organization: antora-supplemental
+      #   Repository: antora-incremental
+      #   Workflow filename: release.yml
+      # Requires npm CLI ≥ 11.5.1 (Node 24). No NPM_TOKEN.
+      - name: Publish to npm
+        run: |
+          npm install -g npm@latest
+          npm publish --access public --provenance
+
+      - name: Create GitHub Release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${RELEASE_VERSION#v}"
+          NOTES="Release v$VERSION"
+          if [ -f CHANGELOG.adoc ]; then
+            EXTRACTED=$(awk -v v="$VERSION" '
+              $0 ~ "^== \\[" v "\\]" {flag=1; next}
+              flag && /^== \[/ {exit}
+              flag {print}' CHANGELOG.adoc)
+            if [ -n "$EXTRACTED" ]; then NOTES="$EXTRACTED"; fi
+          fi
+          gh release create "$RELEASE_TAG" --title "$RELEASE_TAG" --notes "$NOTES" || true
