@@ -1,0 +1,11 @@
+= Changelog
+
+== Timeline
+
+* 2026-07-25 — Initial 0.1.0 (manifest, dirty CLI, partial reconvert hooks)
+
+== [0.1.0]
+
+* Emit `.antora-deps.json` (includes / xrefs / nav / aliases / sources).
+* `antora-dirty` CLI computes dirty page set from changed paths.
+* Extension can skip convert for clean pages when prior site + dirty file are set.

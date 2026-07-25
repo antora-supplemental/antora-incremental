@@ -1,0 +1,48 @@
+{
+  "name": "@antora-supplemental/incremental",
+  "version": "0.1.0",
+  "description": "Antora extension + CLI: dependency manifest, dirty-set computation, partial reconvert helpers.",
+  "license": "MPL-2.0",
+  "author": "Ryan Johnson (https://github.com/AMDphreak)",
+  "keywords": [
+    "antora",
+    "antora-extension",
+    "incremental",
+    "dirty-set"
+  ],
+  "homepage": "https://github.com/antora-supplemental/antora-incremental",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antora-supplemental/antora-incremental.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antora-supplemental/antora-incremental/issues"
+  },
+  "main": "lib/extension.js",
+  "exports": {
+    ".": "./lib/extension.js",
+    "./lib/dirty.js": "./lib/dirty.js",
+    "./lib/scan.js": "./lib/scan.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "antora-dirty": "bin/antora-dirty.js"
+  },
+  "files": [
+    "bin/**/*",
+    "lib/**/*",
+    "README.adoc",
+    "CHANGELOG.adoc",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "peerDependencies": {
+    "@antora/site-generator": ">=3.1.0"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

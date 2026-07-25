@@ -1,0 +1,50 @@
+= @antora-supplemental/incremental
+:toc:
+
+Dependency **manifest**, **dirty-set** CLI, and optional **partial reconvert** for Antora.
+
+Canonical architecture:: link to the docs hub page `site-rebuild.adoc` (Site rebuild v1/v2) — keep PR descriptions short and link there.
+
+== Install
+
+[source,shell]
+----
+pnpm add -D @antora-supplemental/incremental
+# or until npm publish:
+pnpm add -D github:antora-supplemental/antora-incremental
+----
+
+== Playbook (manifest on every full build)
+
+[source,yaml]
+----
+antora:
+  extensions:
+    - require: "@antora-supplemental/incremental"
+----
+
+Writes `build/site/.antora-deps.json` after publish.
+
+== Dirty-set CLI
+
+[source,shell]
+----
+pnpm exec antora-dirty build/site/.antora-deps.json path/to/changed.adoc > /tmp/dirty.json
+----
+
+== Partial reconvert
+
+[source,shell]
+----
+export ANTORA_INCREMENTAL_DIRTY_FILE=/tmp/dirty.json
+export ANTORA_INCREMENTAL_PRIOR_SITE=build/site
+antora antora-playbook.yml
+----
+
+Pages not in the dirty set reuse prior HTML when possible.
+`antora.yml` / UI / playbook changes force a full convert.
+`antora-serve` wires this automatically when the package is installed.
+
+== License
+
+MPL-2.0
