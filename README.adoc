@@ -1,11 +1,39 @@
+ifndef::env-github[:icons: font]
+:toc: preamble
+:toclevels: 2
+:sectanchors:
+endif::[]
+
+ifndef::env-github[]
+image:https://img.shields.io/github/contributors/antora-supplemental/antora-incremental.svg?style=for-the-badge[Contributors,link=https://github.com/antora-supplemental/antora-incremental/graphs/contributors]
+image:https://img.shields.io/github/forks/antora-supplemental/antora-incremental.svg?style=for-the-badge[Forks,link=https://github.com/antora-supplemental/antora-incremental/network/members]
+image:https://img.shields.io/github/stars/antora-supplemental/antora-incremental.svg?style=for-the-badge[Stars,link=https://github.com/antora-supplemental/antora-incremental/stargazers]
+image:https://img.shields.io/github/issues/antora-supplemental/antora-incremental.svg?style=for-the-badge[Issues,link=https://github.com/antora-supplemental/antora-incremental/issues]
+image:https://img.shields.io/github/license/antora-supplemental/antora-incremental.svg?style=for-the-badge[License,link=https://github.com/antora-supplemental/antora-incremental/blob/main/LICENSE]
+endif::[]
+
+ifdef::env-github[]
+image:https://img.shields.io/github/contributors/antora-supplemental/antora-incremental.svg?style=for-the-badge[Contributors]
+image:https://img.shields.io/github/forks/antora-supplemental/antora-incremental.svg?style=for-the-badge[Forks]
+image:https://img.shields.io/github/stars/antora-supplemental/antora-incremental.svg?style=for-the-badge[Stars]
+image:https://img.shields.io/github/issues/antora-supplemental/antora-incremental.svg?style=for-the-badge[Issues]
+image:https://img.shields.io/github/license/antora-supplemental/antora-incremental.svg?style=for-the-badge[License]
+endif::[]
+
 = @antora-supplemental/incremental
-:toc:
+
+Antora dependency manifest, dirty-set CLI, and optional partial reconvert for faster incremental rebuilds.
+
+link:https://github.com/antora-supplemental/antora-incremental/issues[Report Bug] ·
+link:https://github.com/antora-supplemental/antora-incremental/issues[Request Feature]
+
+== About The Project
 
 Dependency **manifest**, **dirty-set** CLI, and optional **partial reconvert** for Antora.
 
 Canonical architecture:: link to the docs hub page `site-rebuild.adoc` (Site rebuild v1/v2) — keep PR descriptions short and link there.
 
-== Install
+== Installation
 
 [source,shell]
 ----
@@ -14,7 +42,9 @@ pnpm add -D @antora-supplemental/incremental
 pnpm add -D github:antora-supplemental/antora-incremental
 ----
 
-== Playbook (manifest on every full build)
+== Usage
+
+=== Playbook (manifest on every full build)
 
 [source,yaml]
 ----
@@ -25,14 +55,14 @@ antora:
 
 Writes `build/site/.antora-deps.json` after publish.
 
-== Dirty-set CLI
+=== Dirty-set CLI
 
 [source,shell]
 ----
 pnpm exec antora-dirty build/site/.antora-deps.json path/to/changed.adoc > /tmp/dirty.json
 ----
 
-== Partial reconvert
+=== Partial reconvert
 
 [source,shell]
 ----
@@ -47,4 +77,11 @@ Pages not in the dirty set reuse prior HTML when possible.
 
 == License
 
-MPL-2.0
+MPL-2.0 — see link:LICENSE[].
+
+== Contact
+
+Antora Supplemental — support@antora-supplemental.org
+
+* Project: https://github.com/antora-supplemental/antora-incremental
+* Site: https://antora-supplemental.org
