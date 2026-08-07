@@ -4,21 +4,12 @@ ifndef::env-github[:icons: font]
 :sectanchors:
 endif::[]
 
-ifndef::env-github[]
+[[readme-top]]
 image:https://img.shields.io/github/contributors/antora-supplemental/antora-incremental.svg?style=for-the-badge[Contributors,link=https://github.com/antora-supplemental/antora-incremental/graphs/contributors]
 image:https://img.shields.io/github/forks/antora-supplemental/antora-incremental.svg?style=for-the-badge[Forks,link=https://github.com/antora-supplemental/antora-incremental/network/members]
 image:https://img.shields.io/github/stars/antora-supplemental/antora-incremental.svg?style=for-the-badge[Stars,link=https://github.com/antora-supplemental/antora-incremental/stargazers]
 image:https://img.shields.io/github/issues/antora-supplemental/antora-incremental.svg?style=for-the-badge[Issues,link=https://github.com/antora-supplemental/antora-incremental/issues]
 image:https://img.shields.io/github/license/antora-supplemental/antora-incremental.svg?style=for-the-badge[License,link=https://github.com/antora-supplemental/antora-incremental/blob/main/LICENSE]
-endif::[]
-
-ifdef::env-github[]
-image:https://img.shields.io/github/contributors/antora-supplemental/antora-incremental.svg?style=for-the-badge[Contributors]
-image:https://img.shields.io/github/forks/antora-supplemental/antora-incremental.svg?style=for-the-badge[Forks]
-image:https://img.shields.io/github/stars/antora-supplemental/antora-incremental.svg?style=for-the-badge[Stars]
-image:https://img.shields.io/github/issues/antora-supplemental/antora-incremental.svg?style=for-the-badge[Issues]
-image:https://img.shields.io/github/license/antora-supplemental/antora-incremental.svg?style=for-the-badge[License]
-endif::[]
 
 = @antora-supplemental/incremental
 
@@ -33,6 +24,8 @@ Dependency **manifest**, **dirty-set** CLI, and optional **partial reconvert** f
 
 Canonical architecture:: link to the docs hub page `site-rebuild.adoc` (Site rebuild v1/v2) — keep PR descriptions short and link there.
 
+link:#readme-top[back to top]
+
 == Installation
 
 [source,shell]
@@ -41,6 +34,8 @@ pnpm add -D @antora-supplemental/incremental
 # or until npm publish:
 pnpm add -D github:antora-supplemental/antora-incremental
 ----
+
+link:#readme-top[back to top]
 
 == Usage
 
@@ -75,9 +70,13 @@ Pages not in the dirty set reuse prior HTML when possible.
 `antora.yml` / UI / playbook changes force a full convert.
 `antora-serve` wires this automatically when the package is installed.
 
+link:#readme-top[back to top]
+
 == License
 
 MPL-2.0 — see link:LICENSE[].
+
+link:#readme-top[back to top]
 
 == Contact
 
@@ -85,3 +84,5 @@ Antora Supplemental — support@antora-supplemental.org
 
 * Project: https://github.com/antora-supplemental/antora-incremental
 * Site: https://antora-supplemental.org
+
+link:#readme-top[back to top]
