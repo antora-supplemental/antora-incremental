@@ -2,6 +2,7 @@
 
 == Timeline
 
+* 2026-09-10 — README Architecture pointer to hub `live-docs.adoc` (Antora Live / dirty-set preview)
 * 2026-07-25 — Initial 0.1.0 (manifest, dirty CLI, partial reconvert hooks)
 
 == [0.1.0]

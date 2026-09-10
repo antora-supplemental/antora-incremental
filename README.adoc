@@ -69,7 +69,7 @@ endif::[]
 
 Dependency **manifest**, **dirty-set** CLI, and optional **partial reconvert** for Antora.
 
-Canonical architecture:: link to the docs hub page `site-rebuild.adoc` (Site rebuild v1/v2) — keep PR descriptions short and link there.
+Canonical architecture:: link to the docs hub pages `site-rebuild.adoc` (Site rebuild v1/v2) and `live-docs.adoc` (Antora Live — DB collab authoring; Live uses incremental dirty-set for workspace preview) — keep PR descriptions short and link there.
 
 ++++
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
